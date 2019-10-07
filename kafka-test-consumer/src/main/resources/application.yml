@@ -1,0 +1,5 @@
+server:
+  port: 8001
+kafka:
+  bootstrapAddress: "localhost:9091,localhost:9092,localhost:9093"
+  groupId: "test-group"

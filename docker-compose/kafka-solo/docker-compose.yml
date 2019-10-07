@@ -1,0 +1,23 @@
+# Easier setup to run both consumer and producer outside docker
+
+version: "3.3"
+
+services:
+  zookeeper:
+    image: confluent/zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      zk_id: "1"
+
+  kafka:
+    image: confluent/kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_ADVERTISED_HOST_NAME: "localhost"
+      KAFKA_ADVERTISED_PORT: "9092"
+      KAFKA_CREATE_TOPICS: "testtopic:1:3"
